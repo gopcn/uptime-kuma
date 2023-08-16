@@ -18,7 +18,7 @@ echo "部署成功，点击Run使用。"
 # 进入项目目录并拉取代码
 cd uptime-kuma
 git fetch --all
-git checkout 1.22.0 --force
+git checkout 1.22.1 --force
 
 # 安装依赖、下载分发文件并重启应用
 npm ci --production
