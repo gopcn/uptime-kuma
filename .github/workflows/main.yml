@@ -1,0 +1,38 @@
+name: Update Latest Release
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+jobs:
+  update_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Get latest release
+        id: get-latest-release
+        uses: pozetroninc/github-action-get-latest-release@master
+        with:
+          repository: louislam/uptime-kuma
+          excludes: prerelease, draft
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Replace content in README
+        run: sed -i "s/git checkout [0-9.]\+ --force/git checkout ${{ steps.get-latest-release.outputs.release }} --force/" README.md
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "gopcn"
+          git config --global user.email "121377609+gopcn@users.noreply.github.com"
+
+      - name: Commit changes
+        run: |
+          git add .
+          git diff-index --quiet HEAD || git commit -m "${{ steps.get-latest-release.outputs.release }}"
+
+      - name: Push changes
+        run: git push
