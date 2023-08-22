@@ -6,10 +6,10 @@
 **[Node.js](https://replit.com)**
 
 ```bash
-git clone https://github.com/gopcn/uptime-replit.git &&
+git clone https://github.com/gopcn/uptime-kuma.git &&
 shopt -s dotglob &&
-mv -b uptime-replit/* ./ &&
-rm -rf *~ uptime-replit .git .github index.js README.md &&
+mv -b uptime-kuma/* ./ &&
+rm -rf *~ uptime-kuma .git .github index.js README.md &&
 echo "部署成功，点击Run使用。"
 ```
 
