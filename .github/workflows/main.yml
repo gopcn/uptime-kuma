@@ -2,7 +2,7 @@ name: Update Latest Release
 
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '25,50 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Get latest release
         id: get-latest-release
