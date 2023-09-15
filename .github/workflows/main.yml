@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Get latest release
         id: get-latest-release
@@ -29,10 +29,8 @@ jobs:
           git config --global user.name "gopcn"
           git config --global user.email "121377609+gopcn@users.noreply.github.com"
 
-      - name: Commit changes
+      - name: Commit and push changes if necessary
         run: |
           git add .
           git diff-index --quiet HEAD || git commit -m "${{ steps.get-latest-release.outputs.release }}"
-
-      - name: Push changes
-        run: git push
+          git push
