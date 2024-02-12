@@ -24,13 +24,10 @@ jobs:
       - name: Replace content in README
         run: sed -i "s/git checkout [0-9.]\+ --force/git checkout ${{ steps.get-latest-release.outputs.release }} --force/" README.md
 
-      - name: Configure Git
-        run: |
-          git config --global user.name "gopcn"
-          git config --global user.email "121377609+gopcn@users.noreply.github.com"
-
       - name: Commit and push changes if necessary
         run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
           git add .
           git diff-index --quiet HEAD || git commit -m "${{ steps.get-latest-release.outputs.release }}"
           git push
